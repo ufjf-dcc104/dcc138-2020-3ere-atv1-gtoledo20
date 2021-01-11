@@ -10,9 +10,14 @@
     <canvas></canvas>
     <p>por Gabriel Toledo</p>
     <script>
-        let canvas = document.querySelector("canvas ");
+        let canvas = document.querySelector("canvas");
+        let ctx = canvas.getContext("2d");
+
         canvas.width = 480;
         canvas.height = 320;
+        ctx.fillStyle = "black";
+        ctx.fillRect(10,30,40,50);
+
     </script>
 </body>
 </html>
