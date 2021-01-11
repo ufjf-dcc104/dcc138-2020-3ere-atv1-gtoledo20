@@ -9,6 +9,7 @@
     <h1>DCC Exemplo_01</h1>
     <canvas></canvas>
     <p>por Gabriel Toledo</p>
+
     <script>
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
@@ -24,11 +25,14 @@
         {
             t0 = t0 ?? t;
             dt = (t - t0)/1000;
-            
+
             //Desenha fundo
             ctx.fillStyle = "black";
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
+            //Atualiza estado
+            x = x + 40*dt;
+          
             //Desenha elementos
             ctx.fillStyle = "white";
             ctx.fillRect(x,150,20,20);
