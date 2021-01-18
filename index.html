@@ -46,6 +46,7 @@
         }
         
         addEventListener("keydown", teclaPressionada);
+        addEventListener("keyup", teclaSolta);
         
         function teclaPressionada(event)
         {
@@ -65,6 +66,31 @@
 
                 case "ArrowRight":
                     vx = +20;
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+
+        function teclaSolta(event)
+        {
+            //Adiciona controles de velocidades
+            switch (event.key) {
+                case "ArrowUp":
+                    vy = 0;
+                    break;
+
+                case "ArrowDown":
+                    vy = 0;
+                    break;
+                
+                case "ArrowLeft":
+                    vx = 0;
+                    break;
+
+                case "ArrowRight":
+                    vx = 0;
                     break;
             
                 default:
