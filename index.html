@@ -21,10 +21,9 @@
             y : 100,
             vy : 0,
             ay : 0,
-            desenhar: function(){
-            ctx.fillStyle = "white";
-            ctx.fillRect(this.x,this.y,20,20);
-            }
+            desenhar: desenhaObjeto,
+            mover: moverElemento,
+            cor: "white"
         };
       
         let e = 
@@ -34,11 +33,10 @@
              ax : 0,
              y : 200,
              vy : 0,
-             ay : 0,
-            desenhar:function(){
-                ctx.fillStyle = "red";
-                ctx.fillRect(e.x,e.y,20,20);
-             } 
+             ay : 0, 
+             desenhar: desenhaObjeto,
+             mover: moverElemento,
+             cor: "red"
         };
        
 
@@ -65,15 +63,8 @@
             
 
             //Atualiza dinamica dos estado
-            p.vx = p.vx + p.ax*dt;
-            p.x = p.x + p.vx*dt;
-            p.vy = p.vy + p.ay*dt;
-            p.y = p.y + p.vy*dt;
-
-            e.vx = e.vx + e.ax*dt;
-            e.x = e.x + e.vx*dt;
-            e.vy = e.vy + e.ay*dt;
-            e.y = e.y + e.vy*dt;
+            p.mover();
+            e.mover();
           
             //Desenha elementos
             p.desenhar();
@@ -83,6 +74,20 @@
 
             requestAnimationFrame(desenha);
             t0 = t;
+        }
+
+        function moverElemento()
+        {
+            this.vx = this.vx + this.ax*dt;
+            this.x = this.x + this.vx*dt;
+            this.vy = this.vy + this.ay*dt;
+            this.y = this.y + this.vy*dt;
+        }
+
+        function desenhaObjeto()
+        {
+            ctx.fillStyle = this.cor;
+            ctx.fillRect(this.x,this.y,20,20);
         }
         
         addEventListener("keydown", teclaPressionada);
