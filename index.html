@@ -6,7 +6,7 @@
     <title>DCC138 e.xemplo_01</title>
 </head>
 <body>
-    <h1>DCC e.xemplo_01</h1>
+    <h1>DCC exemplo_01</h1>
     <canvas></canvas>
     <p>por Gabriel Toledo</p>
 
@@ -25,13 +25,15 @@
             mover: moverElemento,
             cor: "white"
         };
-      
+
+        const sprites = [];
+        for (let numEnemies = 0; numEnemies < 10; numEnemies++) {
         let e = 
         {
-             x : 300,
+             x : canvas.width * Math.random(),
              vx : 0,
              ax : 0,
-             y : 200,
+             y : canvas.width * Math.random(),
              vy : 0,
              ay : 0, 
              desenhar: desenhaObjeto,
@@ -39,7 +41,8 @@
              cor: "red",
              controlar: perseguirAlvo
         };
-       
+        sprites.push(e);
+     }
 
         const k = 180;
         let t0;
@@ -59,15 +62,25 @@
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
             //Controladores
-            e.controlar(p);          
+                      
 
             //Atualiza dinamica dos estado
             p.mover();
-            e.mover();
+            
           
             //Desenha elementos
             p.desenhar();
-            e.desenhar();
+
+            //SPRITES
+
+            for (let s = 0; s < sprites.length; s++) {
+                const sprite = sprites[s];
+
+                sprite.controlar(p);
+                sprite.mover();
+                sprite.desenhar();
+            }
+           
 
             
 
