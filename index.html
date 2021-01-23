@@ -21,9 +21,11 @@
             y : 100,
             vy : 0,
             ay : 0,
+            w : 40,
+            h : 15,
             desenhar: desenhaObjeto,
             mover: moverElemento,
-            cor: "white"
+            cor: "lightgrey"
         };
 
         const sprites = [];
@@ -36,6 +38,8 @@
              y : canvas.width * Math.random(),
              vy : 0,
              ay : 0, 
+             w : 15,
+             h : 15,
              desenhar: desenhaObjeto,
              mover: moverElemento,
              cor: "red",
@@ -52,8 +56,10 @@
             y : 150,
             vy : 0,
             ay : 0,
+            w : 5,
+            h : 5,
             desenhar: desenhaObjeto,  
-            cor: "blue",
+            cor: "lightgreen",
             mover: moverElemento,
             controlar: function(){
                 if(this.x > canvas.width + 60){
@@ -89,9 +95,6 @@
             //Atualiza dinamica dos estado
             p.mover();            
           
-            //Desenha elementos
-            p.desenhar();
-
             //SPRITES
 
             for (let s = 0; s < sprites.length; s++) {
@@ -123,7 +126,8 @@
                 ctx.font = "20px Impact"
                 ctx.fillText(pontos, 10, 30);
             }
-           
+            //Desenha elementos
+            p.desenhar();
             requestAnimationFrame(desenha);
             t0 = t;
         }
@@ -139,7 +143,7 @@
         function desenhaObjeto()
         {
             ctx.fillStyle = this.cor;
-            ctx.fillRect(this.x,this.y,20,20);
+            ctx.fillRect(this.x,this.y,this.w,this.h);
         }
 
         function perseguirAlvo(alvo)
@@ -218,7 +222,7 @@
 
         function colidiram(A, B){
             return !(
-                (A.x > B.x + 20) || (A.x + 20 < B.x) || (A.y > B.y + 20) || (A.y + 20 < B.x)
+                (A.x > B.x + B.w) || (A.x + A.w < B.x) || (A.y > B.y + B.h) || (A.y + A.h < B.x)
             );
         }
 
