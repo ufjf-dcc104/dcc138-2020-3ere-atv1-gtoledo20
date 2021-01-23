@@ -13,6 +13,12 @@
     <script>
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
+
+        canvas.width = 480;
+        canvas.height = 320;
+
+        let pontos = 0;
+
         let p =
         {
             x : 150,
@@ -72,15 +78,12 @@
         sprites.push(o);
 
         const k = 250;
+
         let t0;
         let dt;
+
         requestAnimationFrame(desenha);
         
-        canvas.width = 480;
-        canvas.height = 320;
-
-        let pontos = 0;
-
         function desenha(t)
         {
             t0 = t0 ?? t;
@@ -105,12 +108,12 @@
                 sprite.desenhar();
 
                 if(colidiram(o,sprite) && o !== sprite){
-                    o.x = 1000;
+                    o.x = -1000;
                     o.y = -1000;
                     o.vx = 0;
                     o.ax = 0;
                     sprite.x = 1000;
-                    sprite.vs = 100;
+                    sprite.vx = 100;
                     sprite.ax = 0;
                     pontos ++;
                 }
@@ -154,8 +157,8 @@
 
         function evitarAlvo(alvo)
         {
-            this.ax = 0.5*(alvo.x - this.x) - 0.2*this.vx;
-            this.ay = 0.5*(alvo.y - this.y) - 0.2*this.vy;
+            this.ax = -0.5*(alvo.x - this.x) - 0.2*this.vx;
+            this.ay = -0.5*(alvo.y - this.y) - 0.2*this.vy;
         }
         
         addEventListener("keydown", teclaPressionada);
@@ -222,7 +225,7 @@
 
         function colidiram(A, B){
             return !(
-                (A.x > B.x + B.w) || (A.x + A.w < B.x) || (A.y > B.y + B.h) || (A.y + A.h < B.x)
+                (A.x > B.x + B.w) || (A.x + A.w < B.x) || (A.y > B.y + B.h) || (A.y + A.h < B.y)
             );
         }
 
