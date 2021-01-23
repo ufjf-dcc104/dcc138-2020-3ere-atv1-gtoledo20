@@ -44,6 +44,27 @@
         sprites.push(e);
      }
 
+     let o =
+        {
+            x : -1000,
+            vx : 0,
+            ax : 0,
+            y : 150,
+            vy : 0,
+            ay : 0,
+            desenhar: desenhaObjeto,  
+            cor: "blue",
+            mover: moverElemento,
+            controlar: function(){
+                if(this.x > canvas.width + 60){
+                    this.x = -1000;   
+                    this.ax = 0;
+                    this.vx = 0;
+                }
+            }
+        };
+        sprites.push(o);
+
         const k = 180;
         let t0;
         let dt;
@@ -61,12 +82,10 @@
             ctx.fillStyle = "black";
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
-            //Controladores
-                      
+            //Controladores                   
 
             //Atualiza dinamica dos estado
-            p.mover();
-            
+            p.mover();            
           
             //Desenha elementos
             p.desenhar();
@@ -76,14 +95,11 @@
             for (let s = 0; s < sprites.length; s++) {
                 const sprite = sprites[s];
 
-                sprite.controlar(p);
-                sprite.mover();
+                sprite.controlar?.(p);
+                sprite.mover?.();
                 sprite.desenhar();
             }
            
-
-            
-
             requestAnimationFrame(desenha);
             t0 = t;
         }
@@ -161,6 +177,16 @@
                 case "ArrowRight":
                     p.ax = 0;
                     break;
+                 
+                case " ":
+                    if(o.x === -1000){
+                    o.x = p.x;
+                    o.y = p.y;
+                    o.vx = 200;
+                    o.ax =100                                       ;
+                    }
+                    
+                    break;    
             
                 default:
                     break;
